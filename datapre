@@ -1,0 +1,33 @@
+import pandas as pd
+import numpy as np
+
+# Load your dataset
+data = pd.read_csv('diabetes.csv')
+
+# Display the first few rows of the dataset
+print("Original Data:")
+print(data.head())
+
+# Check for missing values
+print("\nMissing Values:")
+print(data.isnull().sum())
+
+# Handle missing values
+# Example: Replace missing values with mean
+data.fillna(data.mean(), inplace=True)
+
+# Example: Convert categorical variables into numerical variables using one-hot encoding
+# Replace 'categorical_column' with your actual categorical column name
+data = pd.get_dummies(data, columns=['categorical_column'])
+
+# Example: Normalize numerical data
+# Replace 'numerical_columns' with your actual numerical column names
+data['numerical_columns'] = (data['numerical_columns'] - data['numerical_columns'].mean()) / data['numerical_columns'].std()
+
+# Display the preprocessed data
+print("\nPreprocessed Data:")
+print(data.head())
+
+# Save the preprocessed data to a new file
+data.to_csv('preprocessed_data.csv', index=False)
+
